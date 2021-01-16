@@ -243,7 +243,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717611445093045790}
-  m_LocalRotation: {x: 0.122213006, y: 0.000000018685045, z: -0.000000002300802, w: 0.99250394}
+  m_LocalRotation: {x: 0.122213, y: -0.000000019092985, z: 0.0000000023510345, w: 0.99250394}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -443,7 +443,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717611445274742364}
-  m_LocalRotation: {x: 0.09373653, y: 0.0000000044687165, z: -4.2073445e-10, w: 0.99559706}
+  m_LocalRotation: {x: 0.09373653, y: -0.0000000042851838, z: 4.0345466e-10, w: 0.99559706}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -925,7 +925,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 4
+  m_Height: 3
   m_Radius: 0.7
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -948,6 +948,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   speed: 6
   turnSmoothTime: 0.1
+  gravity: 14
+  jumpForce: 10
 --- !u!1 &1717611445667412396
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +974,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717611445667412396}
-  m_LocalRotation: {x: 0.15077762, y: 0.000000032939084, z: -0.0000000050239115, w: 0.9885677}
+  m_LocalRotation: {x: 0.1507776, y: -4.9667153e-15, z: 1.0055133e-15, w: 0.9885677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
