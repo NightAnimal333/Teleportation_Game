@@ -6,6 +6,8 @@ public class ThirdPersonMovement : MonoBehaviour
 {
 
     public CharacterController controller;
+    public GameObject teleportSphere;
+    public GameObject weapon;
     public Transform cam;
 
 
@@ -20,24 +22,18 @@ public class ThirdPersonMovement : MonoBehaviour
     int canJump = 1;
 
 
+
     // Update is called once per frame
     void Update()
     {
-        // Camera and movement
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+     
+        // Movement
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        if (direction.magnitude >= 0.1)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        Vector3 move = transform.right * x + transform.forward * z;
 
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
-        }
+        controller.Move(move * speed *  Time.deltaTime);
 
         // Jumping
         if (controller.isGrounded)
@@ -54,9 +50,35 @@ public class ThirdPersonMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canJump >= 1)
         {
             verticalVelocity = jumpForce;
+            canJump = 0;
         }
         Vector3 jumpVector = new Vector3(0, verticalVelocity, 0);
         controller.Move(jumpVector * Time.deltaTime);
 
+        if (Input.GetMouseButtonDown(0)){
+
+            GameObject teleportSphereObject = Instantiate(teleportSphere, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
+            Vector3 newDirection = cam.transform.forward;//playerCharacter.position - transform.position;
+            
+            newDirection.Normalize();
+            teleportSphereObject.GetComponent<TeleportSphere>().direction = newDirection;
+            teleportSphereObject.GetComponent<TeleportSphere>().daddyPlayer = gameObject;
+
+
+        }
+
+        if (Input.GetMouseButtonDown(1)){
+
+            Vector3 newPosition = transform.position;
+            newPosition += transform.forward;
+
+            GameObject weaponObject = Instantiate(weapon, newPosition, Quaternion.identity);
+            
+            weaponObject.GetComponent<WeaponAttack>().daddyPlayer = gameObject;
+
+
+        }
+
     }
+
 }

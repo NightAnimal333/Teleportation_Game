@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Collisions : MonoBehaviour
 {
@@ -16,23 +17,33 @@ public class Collisions : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider collider){
-
-         if (collider.gameObject.tag == "killer"){
-
-            Destroy(gameObject);
+   //  void OnTriggerEnter(Collider collider){
 
 
-         }
+   //       if (collider.gameObject.tag == "killer"){
+
+   //          print("ded trigger");
 
 
-    }
+   //          Destroy(gameObject);
+   //          SceneManager.LoadScene("Restart");
+
+   //       }
+
+
+   //  }
 
     void OnCollisionEnter(Collision collision){
 
+
+
          if (collision.gameObject.tag == "killer"){
 
+            print("ded collishun");
+
+
             Destroy(gameObject);
+            SceneManager.LoadScene("Restart");
 
 
          }

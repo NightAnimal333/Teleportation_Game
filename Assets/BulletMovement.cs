@@ -30,4 +30,32 @@ public class BulletMovement : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnCollisionEnter(Collision collision){
+
+
+        if (collision.gameObject.tag == "wall"){
+           // print("Henlo123 wall");
+
+            Destroy(gameObject);
+
+        }
+
+        if (collision.gameObject.tag == "platform"){
+           // print("Henlo123 platform");
+
+
+            Destroy(gameObject);
+
+        }
+
+    }
+
+    void OnTriggerEnter(Collider collider){
+
+        if (collider.gameObject.tag == "weapon"){
+            direction *= -1;
+        }
+
+    }
 }

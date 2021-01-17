@@ -5,50 +5,63 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
 
-public CharacterController characterController;
-public GameObject bullet;
+    public CharacterController characterController;
+    public GameObject bullet;
 
-public float shootingIntervals = 2f;
+    public float shootingIntervals = 2f;
 
-private float timer = 0f;
+    private float timer = 0f;
 
-public Transform playerCharacter;
+    public Transform playerCharacter;
 
-    // Start is called before the first frame update
-void Start()
-{
-    //bullet.direction = new Vector3(playerCharacter.position.x, playerCharacter.position.y, playerCharacter.position.z);
+        // Start is called before the first frame update
+    void Start()
+    {
+        //bullet.direction = new Vector3(playerCharacter.position.x, playerCharacter.position.y, playerCharacter.position.z);
 
 
-}
-
-// Update is called once per frame
-void Update()
-{
-
-    timer += Time.deltaTime;
-
-    if (timer > shootingIntervals){
-        Shoot();
-        timer = 0f;
     }
 
-    //print(playerCharacter.position);
+    // Update is called once per frame
+    void Update()
+    {
+
+        timer += Time.deltaTime;
+
+        if (timer > shootingIntervals){
+            Shoot();
+            timer = 0f;
+        }
+
+        //print(playerCharacter.position);
 
 
-    // Vector3 direction = new Vector3(playerCharacter.position.x, playerCharacter.position.y, playerCharacter.position.z);
+        // Vector3 direction = new Vector3(playerCharacter.position.x, playerCharacter.position.y, playerCharacter.position.z);
 
-    //  characterController.Move(direction * 1f * Time.deltaTime);
+        //  characterController.Move(direction * 1f * Time.deltaTime);
 
-}
+    }
 
-void Shoot(){
+    void Shoot(){
 
-    GameObject bulletObject = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-    Vector3 newDirection = playerCharacter.position - transform.position;
-    
-    newDirection.Normalize();
-    bulletObject.GetComponent<BulletMovement>().direction = newDirection;
+        GameObject bulletObject = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        Vector3 newDirection = playerCharacter.position - transform.position;
+        
+        newDirection.Normalize();
+        bulletObject.GetComponent<BulletMovement>().direction = newDirection;
 
-}
+    }
+
+    void OnTriggerEnter(Collider collider){
+
+        print("I COLLIDED");
+        print(collider.gameObject.tag);
+
+        if (collider.gameObject.tag == "weapon"){
+
+            Destroy(gameObject);
+
+        }
+
+    }
 }
